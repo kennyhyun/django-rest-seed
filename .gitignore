@@ -14,3 +14,9 @@ tests/.coverage
 build/
 tests/report/
 /djangoEnv3
+*.bk
+*.bak
+*.org
+webpack-stats.json
+/baseproject/static/bundles
+
