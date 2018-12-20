@@ -6,7 +6,10 @@
   "scripts": {
     "build": "webpack --config webpack.config.js --progress --colors --mode development",
     "watch": "webpack --config webpack.config.js --watch --mode development",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prettier": "prettier --single-quote --trailing-comma es5 --write \"{src,__{tests,mocks}__}/**/*.js\"",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "keywords": [],
   "author": "",
@@ -16,12 +19,22 @@
     "@babel/plugin-transform-react-jsx": "^7.2.0",
     "@babel/preset-env": "^7.2.0",
     "@babel/preset-react": "^7.0.0",
+    "@storybook/addon-actions": "^4.1.3",
+    "@storybook/addon-links": "^4.1.3",
+    "@storybook/addons": "^4.1.3",
+    "@storybook/react": "^4.1.3",
     "babel-loader": "^8.0.4",
+    "eslint-config-prettier": "^3.3.0",
+    "eslint-plugin-prettier": "^3.0.0",
     "webpack": "^4.27.1",
     "webpack-bundle-tracker": "^0.4.2-beta",
     "webpack-cli": "^3.1.2"
   },
   "dependencies": {
+    "@material-ui/core": "^3.7.0",
+    "@material-ui/styles": "^3.0.0-alpha.4",
+    "lodash": "^4.17.11",
+    "proptypes-helper": "^0.1.2",
     "react": "^16.6.3",
     "react-dom": "^16.6.3"
   }
