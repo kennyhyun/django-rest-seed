@@ -1,0 +1,22 @@
+{% load render_bundle from webpack_loader %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Example</title>
+    <script>
+      var errors = {{ errors|safe }};
+    </script>
+    <style>
+body {
+  margin: 0;
+}
+    </style>
+  </head>
+
+  <body>
+    <form>{% csrf_token %}</form>
+    <div id="react"></div>
+    {% render_bundle 'main' %}
+  </body>
+</html>
