@@ -5,6 +5,15 @@
 * pip3
   `sudo apt-get install python3-pip`
 
+## Django project and apps
+
+The project named as `baseproject`. Rename it if you want to.
+`v1api` is an app for REST API.
+
+- `/v1/` : Api root
+- `/v1/users/` : User List
+- `/v1/groups/` : Group List
+
 ## Setting up a new app
 
 1. rename app directory
@@ -34,7 +43,7 @@
 call users by httpie
 
 ```
-(djangoEnv3) $ http -a admin:adminpw http://127.0.0.1:8000/users/
+(djangoEnv3) $ http -a admin:adminpw http://127.0.0.1:8000/v1/users/
 HTTP/1.0 200 OK
 Allow: GET, POST, HEAD, OPTIONS
 Content-Length: 161
@@ -52,7 +61,7 @@ X-Frame-Options: SAMEORIGIN
         {
             "email": "xxx@yyy.com",
             "groups": [],
-            "url": "http://127.0.0.1:8000/users/1/",
+            "url": "http://127.0.0.1:8000/v1/users/1/",
             "username": "admin"
         }
     ]
