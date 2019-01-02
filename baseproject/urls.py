@@ -35,5 +35,7 @@ urlpatterns = [
     url(r'^v1/api-token-verify/', verify_jwt_token),
     url(r'^admin/', admin.site.urls),
     url(r'^signup', authViews.signup, name='signup'),
+    url(r'^signin', authViews.signin, name='signin'),
+    url(r'^signout', authViews.signout, name='signout'),
     url(r'^', authViews.home, name='home'),
 ]
