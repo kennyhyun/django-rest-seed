@@ -13,6 +13,7 @@ import Divider from '@material-ui/core/Divider';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
+import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 
 import Grid from '@material-ui/core/Grid';
@@ -82,7 +83,14 @@ class Signup extends React.Component {
   validate = e => {
     const key = e && e.target.name;
     const { values, errors } = parseFormValueFromElements(this.formRef.current.elements, key && [key]);
-    if (key) {
+    if (key === 'country') {
+      const mobile = this.formRef.current.elements.mobileNo.value;
+      if (!values.country && mobile) {
+        this.setState({ errors: { ...this.state.errors, country: 'country is required' } });
+      } else {
+        this.setState({ errors: { ...this.state.errors, country: '' } });
+      }
+    } else if (key) {
       this.setState({ errors: { ...this.state.errors, [key]: errors[key] } });
     } else {
       this.setState({ errors });
@@ -91,6 +99,9 @@ class Signup extends React.Component {
 
   validateAndConfirm = e => {
     const { values, errors } = parseFormValueFromElements(this.formRef.current.elements);
+    if (values.mobileNo && !values.country) {
+      errors.country = 'country is required';
+    }
     this.setState({ errors });
     if (!Object.keys(errors).length) {
       this.props.onConfirm(values);
@@ -103,6 +114,7 @@ class Signup extends React.Component {
       setCountry,
       classes,
     } = this.props;
+    const { errors = {} } = this.state;
     return (
       <Card classes={{ root: classes.card }} >
         <CardHeader title="Sign up" classes={{ root: classes.header }}/>
@@ -151,7 +163,8 @@ class Signup extends React.Component {
             />
 
             <Row>
-              <FormControl className={classes.formControl}>
+              <FormControl className={classes.formControl} error={!!errors.country}
+      >
                 <InputLabel htmlFor="age-simple">Country</InputLabel>
                 <Select
                   value={country}
@@ -160,6 +173,7 @@ class Signup extends React.Component {
                     id: 'Country',
                     name: 'country',
                   }}
+                  onBlur={this.validate}
                 >
                   <MenuItem value="">
                     <em>None</em>
@@ -167,6 +181,7 @@ class Signup extends React.Component {
                   <MenuItem value="Korea">Korea</MenuItem>
                   <MenuItem value="Australia">Australia</MenuItem>
                 </Select>
+                {errors.country && <FormHelperText>{errors.country}</FormHelperText>}
               </FormControl>
 
               &nbsp;
