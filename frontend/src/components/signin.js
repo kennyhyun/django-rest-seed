@@ -80,6 +80,10 @@ class Signin extends React.Component {
     }
   };
 
+  signup = e => {
+    this.props.onConfirm({ redirect: 'signup' });
+  };
+
   validateAndConfirm = () => {
     const { values, errors } = parseFormValueFromElements(this.formRef.current.elements);
     this.setState({ errors });
@@ -100,29 +104,30 @@ class Signin extends React.Component {
           <form ref={this.formRef} className="signin">
             <TextField
               required
-              name="Email"
-              type="email"
               label="Email"
+              id="username"
+              name="username"
+              type="email"
               defaultValue=""
               fullWidth
               className={classes.textField}
               margin="normal"
-              {...this.getErrorProps('Email')}
+              {...this.getErrorProps('username')}
               onBlur={this.validate}
               onKeyPress={e => e.charCode == 13 && this.validateAndConfirm()}
             />
 
             <TextField
               required
-              id="password"
-              name="Password"
               label="Password"
+              name="password"
+              id="password"
               type="password"
               defaultValue=""
               fullWidth
               className={classes.textField}
               margin="normal"
-              {...this.getErrorProps('Password')}
+              {...this.getErrorProps('password')}
               onBlur={this.validate}
               onKeyPress={e => e.charCode == 13 && this.validateAndConfirm()}
             />
@@ -168,7 +173,7 @@ class Signin extends React.Component {
             </Row>
 
             <Row>
-              <Button className={classes.button} color="primary" >Sign me up</Button>
+              <Button className={classes.button} color="primary" onClick={this.signup}>Sign me up</Button>
             </Row>
         </CardActions>
       </Card>

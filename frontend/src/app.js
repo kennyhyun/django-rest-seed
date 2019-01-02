@@ -1,12 +1,14 @@
 import React from 'react';
 import Snackbar from '@material-ui/core/Snackbar';
 import UserInfo from './components/userInfo';
+import AuthButton from './components/authButton';
 
 function Welcome(props) {
   return (
     <>
       <h1>Hello {props.name.toUpperCase()}!</h1>
       <UserInfo user={props.user}/>
+      <AuthButton user={props.user}/>
     </>
   );
 }
