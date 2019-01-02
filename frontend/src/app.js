@@ -1,9 +1,13 @@
 import React from 'react';
 import Snackbar from '@material-ui/core/Snackbar';
+import UserInfo from './components/userInfo';
 
 function Welcome(props) {
   return (
-    <h1>Hello {props.name.toUpperCase()}!</h1>
+    <>
+      <h1>Hello {props.name.toUpperCase()}!</h1>
+      <UserInfo user={props.user}/>
+    </>
   );
 }
 
@@ -21,7 +25,7 @@ class App extends React.Component {
     switch (url.pathname) {
       case '/':
         this.child = Welcome;
-        this.childProps = { name: 'world from app' };
+        this.childProps = { name: 'world from app', user: p.user };
         break;
       default:
         try {

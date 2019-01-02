@@ -11,7 +11,15 @@ import App from '../src/app';
 storiesOf('Welcome', module).add('to Storybook', () => <Welcome showApp={linkTo('Button')} />);
 
 storiesOf('App', module)
-  .add('foo.bar/', () => <App history={{ location: 'http://foo.bar' }}/>)
+  .add('foo.bar/', () => <App history={{ location: 'http://foo.bar' }}
+    user={{
+      loggedIn: true,
+      email: 'email@address',
+      name: 'John Doe',
+      country: 'A country',
+      mobileNo: '0000',
+    }}
+    />)
   .add('foo.bar/ with errors', () =>
     <App history={{ location: 'http://foo.bar' }} errors={{
       "name": [{"message": "This field is required.", "code": "required"}], "password1": [{"message": "This field is required.", "code": "required"}], "password2": [{"message": "This field is required.", "code": "required"}], "username": [{"message": "This field is required.", "code": "required"}]

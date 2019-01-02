@@ -20,6 +20,11 @@ const onConfirm = args => {
 };
 
 ReactDOM.render(
-    <App history={history} onConfirm={onConfirm} errors={typeof errors != 'undefined' && errors}/>,
-    document.getElementById('react')
+  <App
+    history={history}
+    onConfirm={onConfirm}
+    user={typeof user != 'undefined' && user}
+    errors={typeof errors != 'undefined' && errors}
+  />,
+  document.getElementById('react')
 );
