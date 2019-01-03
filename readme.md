@@ -31,10 +31,15 @@ The project named as `baseproject`. Rename it if you want to.
   `source djangoEnv3/bin/activate`
 1. install requirements
   `pip3 install -r ./requirements.txt`
+1. create RSA keys
+  `openssl genrsa -out rsakey.pem`
+  `openssl rsa -in rsakey.pem -pubout > rsakey.pub`
 1. migrate dB
   `python manage.py migrate`
 1. create admin
   `python manage.py createsuperuser`
+1. build frontend
+  `cd frontend && npm i && npm run build && cd -`
 
 ## run debug env
 
