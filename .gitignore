@@ -19,4 +19,5 @@ tests/report/
 *.org
 webpack-stats.json
 /baseproject/static/bundles
-
+/rsakey.pem
+/rsakey.pub

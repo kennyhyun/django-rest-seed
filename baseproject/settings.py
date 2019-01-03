@@ -145,3 +145,22 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# http://getblimp.github.io/django-rest-framework-jwt/#additional-settings
+JWT_PRIVATE_KEY_NAME = os.environ.get('JWT_PRIVATE_KEY_NAME', 'rsakey.pem')
+JWT_PUBLIC_KEY_NAME = os.environ.get('JWT_PUBLIC_KEY_NAME', 'rsakey.pub')
+prvk = open(JWT_PRIVATE_KEY_NAME, 'r')
+pubk = open(JWT_PUBLIC_KEY_NAME, 'r')
+
+from datetime import timedelta
+
+JWT_AUTH = {
+    'JWT_PUBLIC_KEY': pubk.read(),
+    'JWT_PRIVATE_KEY': prvk.read(),
+    'JWT_EXPIRATION_DELTA': timedelta(hours=24),
+    'JWT_ALGORITHM': 'RS256',
+    'JWT_PAYLOAD_HANDLER': 'defaultauth.views.jwt_payload',
+}
+
+prvk.close()
+pubk.close()
