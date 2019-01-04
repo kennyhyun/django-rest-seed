@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+if [[ -z "${DOCKERHUB_USER}" ]]; then
+    echo "env var DOCKERHUB_USER is undefined"
+    exit
+fi
+
+docker-compose build django &&\
+  docker tag django $DOCKERHUB_USER/django:latest &&\
+  docker push $DOCKERHUB_USER/django:latest
+

@@ -1,0 +1,4 @@
+**/.git
+**/.gitmodules
+**/.gitignore
+source/frontend/node_modules

@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+#create-swarm-traefik
+
+TRAEFIK_NETWORK_NAME=traefik-net
+SERVICE_NAME=traefik
+
+docker service rm $SERVICE_NAME
+
+docker network rm $TRAEFIK_NETWORK_NAME
+
+docker swarm leave

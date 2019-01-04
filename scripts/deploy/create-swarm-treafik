@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+#create-swarm-traefik
+
+DOMAIN=learnabout.kr
+LOAD_BALANCER_PORT=80
+DASHBOARD_PORT=8080
+TRAEFIK_NETWORK_NAME=traefik-net # this name is used in docker-compose.yml
+SERVICE_NAME=traefik
+
+docker swarm init
+docker network create --driver=overlay --attachable $TRAEFIK_NETWORK_NAME
+docker service create \
+    --name $SERVICE_NAME \
+    --constraint=node.role==manager \
+    --publish $LOAD_BALANCER_PORT:80 --publish $DASHBOARD_PORT:8080 \
+    --mount type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock \
+    --network $TRAEFIK_NETWORK_NAME \
+    $SERVICE_NAME \
+    --docker \
+    --docker.swarmMode \
+    --docker.domain=$DOMAIN \
+    --docker.watch \
+    --api
+
+

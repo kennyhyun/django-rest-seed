@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  django:
+    image: kennyhyun/django:latest
+    command: python3 manage.py runserver 0.0.0.0:8000
+    deploy:
+      labels:
+        traefik.port: "8000"
+        traefik.frontend.rule: Host:api.yeoyou.net
+      replicas: 1
+      # resources:
+      #   limits:
+      #     cpus: "0.5"
+      #     memory: 50M
+      restart_policy:
+        condition: on-failure
+    networks:
+      - external-traefik
+networks:
+    external-traefik:
+        external: 
+            name: traefik-net
