@@ -164,3 +164,8 @@ JWT_AUTH = {
 
 prvk.close()
 pubk.close()
+
+try:
+    from .settings_local import *
+except:
+    pass
