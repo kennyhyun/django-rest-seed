@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+# pull or clone
+git -C source pull || git clone ../.. source
+
+cd source/frontend
+npm i
+npm run build
+
+cd ../..

@@ -13,6 +13,9 @@ The project named as `baseproject`. Rename it if you want to.
 - `/v1/` : Api root
 - `/v1/users/` : User List
 - `/v1/groups/` : Group List
+- `/v1/api-token-auth/` : Obtain Json Web Token
+- `/v1/api-token-refresh/`: Refresh Json Web Token
+- `/v1/api-token-verify/`: Verify Json Web Token
 
 ## Setting up a new app
 
@@ -28,10 +31,15 @@ The project named as `baseproject`. Rename it if you want to.
   `source djangoEnv3/bin/activate`
 1. install requirements
   `pip3 install -r ./requirements.txt`
+1. create RSA keys
+  `openssl genrsa -out rsakey.pem`
+  `openssl rsa -in rsakey.pem -pubout > rsakey.pub`
 1. migrate dB
   `python manage.py migrate`
 1. create admin
   `python manage.py createsuperuser`
+1. build frontend
+  `cd frontend && npm i && npm run build && cd -`
 
 ## run debug env
 
@@ -84,4 +92,9 @@ sudo apt-get install pkg-config
 ```
 ./manage.py graph_models -a -g -o my_project_visualized.png
 ```
+
+## Modules
+
+- [Django REST framework](https://www.django-rest-framework.org/)
+- [REST framework JWT Auth](http://getblimp.github.io/django-rest-framework-jwt/)
 

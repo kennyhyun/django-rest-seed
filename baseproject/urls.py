@@ -16,7 +16,8 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from rest_framework import routers
-from baseproject.v1api import views
+from .v1api import views
+from defaultauth import views as authViews
 from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token,\
         verify_jwt_token
 
@@ -25,6 +26,7 @@ router.register(r'users', views.UserViewSet)
 router.register(r'groups', views.GroupViewSet)
 
 urlpatterns = [
+    url(r'^$', authViews.home, name='home'),
     url(r'^v1/', include(router.urls)),
     url(r'^v1/api-auth/', include('rest_framework.urls',
         namespace='rest_framework')),
@@ -32,4 +34,8 @@ urlpatterns = [
     url(r'^v1/api-token-refresh/', refresh_jwt_token),
     url(r'^v1/api-token-verify/', verify_jwt_token),
     url(r'^admin/', admin.site.urls),
+    url(r'^signup', authViews.signup, name='signup'),
+    url(r'^signin', authViews.signin, name='signin'),
+    url(r'^signout', authViews.signout, name='signout'),
+    url(r'^', authViews.home, name='home'),
 ]
