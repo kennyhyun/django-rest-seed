@@ -1,19 +1,36 @@
+## settings
 
-`/storage/django` in the docker machine is used for consistent storage.
-refer to `docker-compose.yml`
-`db.sqlite3` file is generated in the `/storage/` in the container
+Production using postgresql.
+edit/create `settings_local.py` for the database host info
+
+`settings_local.py` is to override the `settings.py`
+review ALLOWED_HOSTS for the deployment.
 
 ## sequence
 
-`prepare` - `update` - `start`
+- enter swarm mode/create traefik
+  `./create-swarm-treafik`
+- `prepare`
+- `update`
+- `start`
+
+This docker service uses docker hub repository.
+Please login advance and set the Docker Hub username
+
+```
+$ export DOCKERHUB_USER=kennyhyun
+$ docker login
+```
 
 ## prepare
 
-build docker image and migrate the `db.sqlite3`
+build docker image and migrate the database
 
 ```
 $ EMAIL=user@domain PASSWD=shhhhh ./prepare.sh
 ```
+
+EMAIL/PASSWD is for the administrator
 
 ## update
 
@@ -23,15 +40,9 @@ build webpack and update the docker image
 $ ./update.sh
 ```
 
-If the container is running,
+## start/stop
 
-`docker-compose restart`
+`./start.sh` deploys a stack
 
-## start
+`./stop.sh` remove the stack
 
-`docker-compose start`
-
-## settings
-
-`settings_local.py` is to override the `settings.py`
-review ALLOWED_HOSTS for the deployment.
